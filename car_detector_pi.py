@@ -1,24 +1,15 @@
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
 from imutils.video import VideoStream
-#from threading import Thread
 
 import numpy as np
 
 import imutils
 import time
 import cv2
-#import os
 
 # Define path to Car/Not Car model
 MODEL_PATH = "/home/pi/Car_Detector_Pi/car_model_pi.h5"
-
-# Initialize the total number of frames that consecutively contain car
-TOTAL_CONSEC = 0
-TOTAL_THRESH = 20
-
-# Car alarm has been triggered
-#CAR = False
 
 # Load the model
 print("Loading model...")
@@ -43,18 +34,6 @@ while True:
 
     # Classify the input image and initialize the label and
     # probability of the prediction
-    """(notCar, car) = model.predict(image)[0]
-    label = "Not Car"
-    proba = notCar
-
-    # Check to see if car was detected using CNN
-    if car > notCar:
-        # Update the label and prediction probability
-        label = "Car"
-        proba = car
-
-        # Increment the total number of consecutive frames that contain car
-        #TOTAL_CONSEC += 1"""
     car = model.predict(image)[0]
     label = "Not Car"
     proba = float(car)
